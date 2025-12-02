@@ -3,12 +3,14 @@ const colors = require('ansi-colors')
 const app = express()
 require('dotenv').config()
 
+
 // DB connection
 require('./config/db')()
 
 // middleware
 app.use(express.json())
 app.use(express.static('public'))
+
 
 // API routes
 app.use('/api/v1/menu', require('./routes/api/v1/menu'))
