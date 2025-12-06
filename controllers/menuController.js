@@ -1,4 +1,4 @@
-const MenuItem = require('../models/MenuItem')
+/* const MenuItem = require('../models/MenuItem')
 
 module.exports = {
     getMenu: async (req, res) => {
@@ -16,3 +16,4 @@ module.exports = {
         res.json(newItem)
     }
 }
+ */

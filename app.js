@@ -1,27 +1,22 @@
-const express = require('express')
-const colors = require('ansi-colors')
-const app = express()
-require('dotenv').config()
+const express = require('express');
+const path = require('path');
+require('dotenv').config();
 
+const app = express();
+const port = 3000;
 
-// DB connection
-require('./config/db')()
+app.use(express.json());
 
-// middleware
-app.use(express.json())
-app.use(express.static('public'))
-
+// static assets (images, css, js)
+app.use(express.static(path.join(__dirname, 'public')));
 
 // API routes
-app.use('/api/v1/menu', require('./routes/api/v1/menu'))
-app.use('/api/v1/events', require('./routes/api/v1/events'))
+app.use('/api/v1/menu', require('./routes/api/v1/menu'));
+app.use('/api/v1/events', require('./routes/api/v1/event'));
 
-// page routes
-app.use('/', require('./routes/pages/home'))
-app.use('/event', require('./routes/pages/eventDetails'))
-app.use('/admin', require('./routes/pages/admin'))
+// STATIC HTML ROUTES
+app.use('/', require('./routes/static'));
 
-const PORT = process.env.PORT || 3000
-app.listen(PORT, () =>
-    console.log(colors.green(`Server running on port ${PORT}`))
-)
+app.listen(port, () =>
+  console.log(`Server running at http://localhost:${port}`)
+);

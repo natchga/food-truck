@@ -1,27 +1,20 @@
-const router = require('express').Router();
+const express = require('express');
 const path = require('path');
-const root = path.join(__dirname, '..', 'public');
+const router = express.Router();
 
-// Home
+// EVENTS LIST PAGE
+router.get('/events', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/events.html'));
+});
+
+// SINGLE EVENT PAGE
+router.get('/event/:id', (req, res) => {
+    res.sendFile(path.join(__dirname, '../views/event.html'));
+});
+
+// HOME PAGE
 router.get('/', (req, res) => {
-    res.sendFile('index.html', { root });
-});
-
-// Events list (landing page)
-router.get('/event', (req, res) => {
-    res.sendFile('events.html', { root });
-});
-
-router.get('/event/:eventId', (req, res) => {
-    res.sendFile('event.html', { root });
-});
-
-
-
-
-// Admin page
-router.get('/admin', (req, res) => {
-    res.sendFile('admin.html', { root });
+    res.sendFile(path.join(__dirname, '../views/index.html'));
 });
 
 module.exports = router;
