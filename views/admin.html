@@ -1,0 +1,80 @@
+</head>
+
+<body>
+
+<header>
+    <div class="logo-container">
+        <a href="/" class="logo">
+            <img src="/images/rightsizelogo400.png" alt="Logo">
+        </a>
+    </div>
+
+    <div class="foodtruck">
+        <img src="/images/foodtruck.png" width="300">
+    </div>
+
+    <ul id="nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/event">Events</a></li>
+        <li><a class="active" href="/admin">Administration</a></li>
+    </ul>
+</header>
+
+<section class="foodtitle">
+    <h2>Administration Panel</h2>
+</section>
+
+<div class="admin-container">
+
+    <!-- Add MENU Item -->
+    <div class="admin-card">
+        <h2>Add Menu Item</h2>
+
+        <form id="menuForm" class="admin-form">
+
+            <label>Item Name</label>
+            <input type="text" name="name" required>
+
+            <label>Description</label>
+            <textarea name="description" required></textarea>
+
+            <label>Price</label>
+            <input type="text" name="price" required>
+
+            <label>Image URL</label>
+            <input type="text" name="image" required>
+
+            <button type="submit" class="admin-btn">Add Menu Item</button>
+        </form>
+    </div>
+
+
+    <!-- Add EVENT -->
+    <div class="admin-card">
+        <h2>Add Event</h2>
+
+        <form id="eventForm" class="admin-form">
+
+            <label>Event Name</label>
+            <input type="text" name="name" required>
+
+            <label>Date (MM/DD/YYYY)</label>
+            <input type="text" name="Date" required>
+
+            <label>Time</label>
+            <input type="text" name="Time" required>
+
+            <label>Location</label>
+            <input type="text" name="Location" required>
+
+            <label>Description</label>
+            <textarea name="Description"></textarea>
+
+            <button type="submit" class="admin-btn">Add Event</button>
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>
