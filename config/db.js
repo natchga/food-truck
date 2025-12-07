@@ -1,16 +1,16 @@
-require('dotenv').config();
-const { MongoClient, ObjectId } = require('mongodb');
+require('dotenv').config()
+const { MongoClient, ObjectId } = require('mongodb')
 
-const uri = process.env.MONGO_URI;
-const client = new MongoClient(uri);
+const uri = process.env.MONGO_URI
+const client = new MongoClient(uri)
 
 const getCollection = async (dbName, collectionName) => {
     if (!client.topology || !client.topology.isConnected()) {
-        await client.connect();
+        await client.connect()
     }
-    return client.db(dbName).collection(collectionName);
-};
+    return client.db(dbName).collection(collectionName)
+}
 
-module.exports = { getCollection, ObjectId };
+module.exports = { getCollection, ObjectId }
 
 

@@ -1,35 +1,32 @@
 document.getElementById("menuForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const formData = Object.fromEntries(new FormData(e.target).entries());
+    const body = JSON.stringify(Object.fromEntries(new FormData(e.target)))
 
     const res = await fetch("/api/v1/menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-    });
+        body
+    })
 
-    const data = await res.json();
-    alert(data.message || "Item added!");
+    const data = await res.json()
+    alert(data.message || "Item added!")
+    e.target.reset()
+})
 
-    e.target.reset();
-});
 
-
-// --- Add Event ---
 document.getElementById("eventForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
-    const formData = Object.fromEntries(new FormData(e.target).entries());
+    const body = JSON.stringify(Object.fromEntries(new FormData(e.target)))
 
     const res = await fetch("/api/v1/events", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData)
-    });
+        body
+    })
 
-    const data = await res.json();
-    alert(data.message || "Event added!");
-
-    e.target.reset();
-});
+    const data = await res.json()
+    alert(data.message || "Event added!")
+    e.target.reset()
+})
