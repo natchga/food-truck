@@ -20,3 +20,6 @@ app.use('/', require('./routes/static'))
 app.listen(port, () =>
   console.log(`Server running at http://localhost:${port}`)
 )
+
+console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
+

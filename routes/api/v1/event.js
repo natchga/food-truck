@@ -1,45 +1,39 @@
-const express = require("express")
-const router = express.Router()
-const { getCollection, ObjectId } = require('../../../config/db')
+const express = require("express");
+const router = express.Router();
+const { getCollection, ObjectId } = require('../../../config/db');
 
-
-// all events
-router.get('/api/v1/events', async (req, res) => {
+router.get("/", async (req, res) => {
   try {
-    const events = await eventsCollection.find().toArray()
-    res.send(events)
+    const col = await getCollection("food-truckAPI", "Events");
+    const events = await col.find().toArray();
+    res.json(events);
   } catch (err) {
-    res.send({ error: "Could not load events" })
+    console.error("EVENT LIST ERROR:", err);
   }
-})
+});
 
-// using id
 router.get("/:id", async (req, res) => {
   try {
-    const events = await getCollection("food-truckAPI", "Events")
-    const id = req.params.id
+    const col = await getCollection("food-truckAPI", "Events");
+    const event = await col.findOne({ _id: new ObjectId(req.params.id) });
 
-    const event = await events.findOne({ _id: new ObjectId(id) })
+    if (!event) return res.json({ error: "Event not found" });
 
-    if (!event) {
-      return res.json({ error: "Event not found" })
-    }
-
-    res.json(event)
-
+    res.json(event);
   } catch (err) {
-    res.json({ error: "Could not get event" })
+    console.error("EVENT ERROR:", err);
   }
-})
+});
+
+//add event
 router.post("/", async (req, res) => {
   try {
-    const events = await getCollection("food-truckAPI", "Events")
-    await events.insertOne(req.body)
-    res.json({ message: "Event added successfully" })
+    const col = await getCollection("food-truckAPI", "Events");
+    await col.insertOne(req.body);
+    res.json({ message: "Event added successfully" });
   } catch (err) {
-    console.error(err)
-    res.json({ error: "Could not add event" })
+    console.error(err);
   }
-})
+});
 
 module.exports = router;

@@ -12,7 +12,7 @@
                     <img src="${item.Image}" alt="${item.name}">
                     <h3>${item.name}</h3>
                     <p>${item.Description}</p>
-                    <p>$${item.Price.replace("$","")}</p>
+                    <p>${item.Price}</p>
                 </div>
             `).join("")
         } catch (err) {
@@ -59,6 +59,70 @@ if (pathname.startsWith("/event/")) {
         </div>
     `
 }
+
+if (pathname === "/admin") {
+
+    // admin panel event item add
+    const eventForm = document.getElementById("eventForm")
+    if (eventForm) {
+        eventForm.addEventListener("submit", async (e) => {
+            e.preventDefault()
+
+            const formData = new FormData(eventForm)
+            const payload = Object.fromEntries(formData.entries())
+            console.log("Payload being sent:", payload)// test if it's actually going through
+
+
+            try {
+                const res = await fetch("/api/v1/events", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+
+                const data = await res.json()
+                if (!res.ok) throw new Error(data.message || "Event could not be added")
+
+                alert("Event added successfully")
+                eventForm.reset()
+            } catch (err) {
+                console.error("EVENT ERROR:", err)
+                alert("Error adding event: " + err.message)
+            }
+        })
+    }
+
+    //admin panel menu item add
+    const menuForm = document.getElementById("menuForm")
+    if (menuForm) {
+        menuForm.addEventListener("submit", async (e) => {
+            e.preventDefault()
+
+            const formData = new FormData(menuForm)
+            const payload = Object.fromEntries(formData.entries())
+            console.log("Payload being sent:", payload)// test if it's actually going through
+
+
+            try {
+                const res = await fetch("/api/v1/menu", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload)
+                })
+
+                const data = await res.json()
+                if (!res.ok) throw new Error(data.message || "Menu item could not be added")
+
+                alert("Menu item added")
+                menuForm.reset()
+            } catch (err) {
+                console.error("MENU ERROR:", err)
+                alert("Error adding menu item: " + err.message)
+            }
+        })
+    }
+}
+
 
 
 })()
